@@ -1,32 +1,61 @@
-# Prerequisites
-*.d
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+# Folder config file
+Desktop.ini
 
-# Precompiled Headers
-*.gch
-*.pch
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
 
-# Fortran module files
-*.mod
-*.smod
+# Windows shortcuts
+*.lnk
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
+# =========================
+# Operating System Files
+# =========================
 
-# Executables
+# OSX
+# =========================
+
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+*.cache
+src/NHB.v12.suo
 *.exe
-*.out
-*.app
+*.config
+*.dll
+*.pdb
+src/NiceHashBot/bin/*
+src/NiceHashBot/obj/*
+src/NiceHashBotLib/bin/*
+src/NiceHashBotLib/obj/*
+src/HandlerExample/bin/*
+src/HandlerExample/obj/*
+*.lock
+src/.vs/NHB/v15/Server/sqlite3/storage.ide-wal
+src/.vs/NHB/v15/Server/sqlite3/storage.ide
+src/.vs/NHB/v15/Server/sqlite3/storage.ide-shm
+src/.vs/NHB/v15/Server/sqlite3/storage.ide-wal
+src/.vs/NHB/v15/Server/sqlite3/storage.ide-shm
