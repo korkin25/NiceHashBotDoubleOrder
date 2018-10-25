@@ -15,7 +15,7 @@ namespace NiceHashBot
     {
         private Pool[] Pools;
         private bool linked = false;
-        private Timer BalanceRefresh, TimerRefresh, OrderTimer;
+        public Timer BalanceRefresh, TimerRefresh, OrderTimer;
 
         double LimitBuffer;
         double MaxPriceBuffer;
@@ -43,6 +43,8 @@ namespace NiceHashBot
             TimerRefresh.Start();
             TimerRefresh_Tick(null, null);
             FindOrdersButton.Click += new EventHandler(TimerRefresh_Tick);
+            EUConfirmButton.Click += new EventHandler(TimerRefresh_Tick);
+            USConfirmButton.Click += new EventHandler(TimerRefresh_Tick);
 
             RefreshPoolList();
 
@@ -77,6 +79,9 @@ namespace NiceHashBot
 
         private void TimerRefresh_Tick(object sender, EventArgs e)
         {
+            EUOrderPanel.Controls.Clear();
+            USOrderPanel.Controls.Clear();
+
             if (!APIWrapper.ValidAuthorization) return;
 
             OrderContainer[] Orders = OrderContainer.GetAll();
@@ -86,19 +91,19 @@ namespace NiceHashBot
             List<OrderPanel> OrderPanels = new List<OrderPanel>();
 
             for (int i = 0; i < Orders.Length; i++)
-                OrderPanels.Add(new OrderPanel(Orders[i]));
+                OrderPanels.Add(new OrderPanel(i, Orders[i], new EventHandler(TimerRefresh_Tick)));
 
             PositionPanels(ref OrderPanels);
 
             foreach (OrderPanel panel in OrderPanels)
             {
                 if (panel.order.ServiceLocation == 0)
-                    //EUOrderPanel.Controls.Add(panel.panel);
-                panel.Place(ref EUOrderPanel);
+                    panel.Place(ref EUOrderPanel, ref SyncOrderPanel);
                 else if (panel.order.ServiceLocation == 1)
-                    //USOrderPanel.Controls.Add(panel.panel);
-                panel.Place(ref USOrderPanel);
+                    panel.Place(ref USOrderPanel, ref SyncOrderPanel);
             }
+
+
         }
 
         private void PositionPanels(ref List<OrderPanel> OrderPanels)
@@ -124,12 +129,11 @@ namespace NiceHashBot
                            (OrderPanels[i].order.Limit == OrderPanels[j].order.Limit)
                        )
                         {
-                            OrderPanels[j].position = pos;
-                            pos++;
+                            OrderPanels[j].position = pos;                            
                             found = true;
-                        }
-                        
+                        }                       
                 }
+                pos++;
             }
         }
 
@@ -162,6 +166,10 @@ namespace NiceHashBot
         {
             if (OnTopCheckBox.Checked) this.TopMost = true;
             else if (!OnTopCheckBox.Checked) this.TopMost = false;
+        }
+
+        private void FormDoubleOrder_Load(object sender, EventArgs e)
+        {
         }
 
         private void USConfirmButton_Click(object sender, EventArgs e)

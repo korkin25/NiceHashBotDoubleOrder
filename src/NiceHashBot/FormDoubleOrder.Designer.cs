@@ -68,6 +68,7 @@
             this.USOrderPanel = new System.Windows.Forms.Panel();
             this.SyncOrderPanel = new System.Windows.Forms.Panel();
             this.MainOrderPanel = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.USPanel.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -75,6 +76,7 @@
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
             this.MainOrderPanel.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // AlgorithmComboBox
@@ -238,7 +240,7 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.USPanel);
+            this.panel1.Controls.Add(this.panel6);
             this.panel1.Controls.Add(this.LinkButton);
             this.panel1.Controls.Add(this.panel5);
             this.panel1.Location = new System.Drawing.Point(-1, 73);
@@ -255,7 +257,7 @@
             this.USPanel.Controls.Add(this.USConfirmButton);
             this.USPanel.Controls.Add(this.USSpeedTextBox);
             this.USPanel.Controls.Add(this.USLabel);
-            this.USPanel.Location = new System.Drawing.Point(248, -1);
+            this.USPanel.Location = new System.Drawing.Point(-1, -1);
             this.USPanel.Name = "USPanel";
             this.USPanel.Size = new System.Drawing.Size(200, 58);
             this.USPanel.TabIndex = 28;
@@ -419,7 +421,7 @@
             // EUOrderPanel
             // 
             this.EUOrderPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.EUOrderPanel.Location = new System.Drawing.Point(454, 33);
+            this.EUOrderPanel.Location = new System.Drawing.Point(1, 0);
             this.EUOrderPanel.Name = "EUOrderPanel";
             this.EUOrderPanel.Size = new System.Drawing.Size(200, 400);
             this.EUOrderPanel.TabIndex = 28;
@@ -427,7 +429,7 @@
             // USOrderPanel
             // 
             this.USOrderPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.USOrderPanel.Location = new System.Drawing.Point(660, 33);
+            this.USOrderPanel.Location = new System.Drawing.Point(250, 0);
             this.USOrderPanel.Name = "USOrderPanel";
             this.USOrderPanel.Size = new System.Drawing.Size(200, 400);
             this.USOrderPanel.TabIndex = 29;
@@ -443,19 +445,29 @@
             // MainOrderPanel
             // 
             this.MainOrderPanel.AutoScroll = true;
+            this.MainOrderPanel.BackColor = System.Drawing.SystemColors.Control;
+            this.MainOrderPanel.Controls.Add(this.USOrderPanel);
+            this.MainOrderPanel.Controls.Add(this.EUOrderPanel);
             this.MainOrderPanel.Controls.Add(this.SyncOrderPanel);
             this.MainOrderPanel.Location = new System.Drawing.Point(-2, 130);
             this.MainOrderPanel.Name = "MainOrderPanel";
-            this.MainOrderPanel.Size = new System.Drawing.Size(450, 401);
+            this.MainOrderPanel.Size = new System.Drawing.Size(467, 401);
             this.MainOrderPanel.TabIndex = 31;
+            // 
+            // panel6
+            // 
+            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel6.Controls.Add(this.USPanel);
+            this.panel6.Location = new System.Drawing.Point(248, -1);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(200, 58);
+            this.panel6.TabIndex = 29;
             // 
             // FormDoubleOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(886, 672);
-            this.Controls.Add(this.EUOrderPanel);
-            this.Controls.Add(this.USOrderPanel);
+            this.ClientSize = new System.Drawing.Size(447, 528);
             this.Controls.Add(this.MainOrderPanel);
             this.Controls.Add(this.OnTopCheckBox);
             this.Controls.Add(this.panel2);
@@ -467,8 +479,9 @@
             this.Controls.Add(this.AlgorithmComboBox);
             this.Controls.Add(this.AlgorithmLabel);
             this.Name = "FormDoubleOrder";
-            this.Text = "Form1";
+            this.Text = "Orders";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormDoubleOrder_FormClosing);
+            this.Load += new System.EventHandler(this.FormDoubleOrder_Load);
             this.panel1.ResumeLayout(false);
             this.USPanel.ResumeLayout(false);
             this.USPanel.PerformLayout();
@@ -481,6 +494,7 @@
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.MainOrderPanel.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -528,5 +542,6 @@
         private System.Windows.Forms.Panel USOrderPanel;
         private System.Windows.Forms.Panel SyncOrderPanel;
         private System.Windows.Forms.Panel MainOrderPanel;
+        private System.Windows.Forms.Panel panel6;
     }
 }
