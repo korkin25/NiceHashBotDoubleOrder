@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using NiceHashBotLib;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace NiceHashBot
 {

@@ -35,6 +35,7 @@ namespace NiceHashBot
             BalanceRefresh.Interval = 30 * 1000;
             BalanceRefresh.Tick += new EventHandler(BalanceRefresh_Tick);
             BalanceRefresh.Start();
+
         }
 
         private void BalanceRefresh_Tick(object sender, EventArgs e)
@@ -158,6 +159,8 @@ namespace NiceHashBot
         private void FormMain_Load(object sender, EventArgs e)
         {
             settingsToolStripMenuItem_Click(sender, e);
+            FormDoubleOrderInstance = new FormDoubleOrder();
+            FormDoubleOrderInstance.Show();
         }
 
         private void setToUnlimitedToolStripMenuItem_Click(object sender, EventArgs e)
