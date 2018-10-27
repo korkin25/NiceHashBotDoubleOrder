@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 using NiceHashBotLib;
 
 namespace NiceHashBot
@@ -43,8 +44,8 @@ namespace NiceHashBot
             TimerRefresh.Start();
             TimerRefresh_Tick(null, null);
             FindOrdersButton.Click += new EventHandler(TimerRefresh_Tick);
-            EUConfirmButton.Click += new EventHandler(TimerRefresh_Tick);
-            USConfirmButton.Click += new EventHandler(TimerRefresh_Tick);
+            AlgorithmComboBox.SelectedIndexChanged += new EventHandler(TimerRefresh_Tick);
+            PoolComboBox.SelectedIndexChanged += new EventHandler(TimerRefresh_Tick);
 
             RefreshPoolList();
 
@@ -77,21 +78,30 @@ namespace NiceHashBot
             }
         }
 
+        private void Refresh()
+        {
+            TimerRefresh_Tick(null, null);
+            BalanceRefresh_Tick(null, null);
+        }
+
         private void TimerRefresh_Tick(object sender, EventArgs e)
         {
             EUOrderPanel.Controls.Clear();
             USOrderPanel.Controls.Clear();
+            SyncOrderPanel.Controls.Clear();
 
             if (!APIWrapper.ValidAuthorization) return;
 
             OrderContainer[] Orders = OrderContainer.GetAll();
-            if (Orders.Length == 0) return;
+            if (Orders.Count() > OrderID) OrderID = Orders.Count();
 
-            OrderID = Orders.Count();
+            if (Orders.Length == 0) return;
+           
             List<OrderPanel> OrderPanels = new List<OrderPanel>();
 
             for (int i = 0; i < Orders.Length; i++)
-                OrderPanels.Add(new OrderPanel(i, Orders[i], new EventHandler(TimerRefresh_Tick)));
+                if (Orders[i].Algorithm == AlgorithmComboBox.SelectedIndex)
+                    OrderPanels.Add(new OrderPanel(i, Orders[i], new EventHandler(TimerRefresh_Tick)));
 
             PositionPanels(ref OrderPanels);
 
@@ -102,14 +112,23 @@ namespace NiceHashBot
                 else if (panel.order.ServiceLocation == 1)
                     panel.Place(ref USOrderPanel, ref SyncOrderPanel);
             }
-
-
         }
 
         private void PositionPanels(ref List<OrderPanel> OrderPanels)
         {
             int pos = 0;
             bool found;
+
+            string path = System.IO.Path.GetDirectoryName(Application.ExecutablePath);
+            if (File.Exists(Path.Combine(path, "SyncData")))
+            {
+                //do stuff
+                Console.WriteLine("File exists");
+            }
+            else
+            {
+                Console.WriteLine("File does not exist");
+            }
 
             for (int i = 0; i < OrderPanels.Count; i++)
             {
@@ -127,9 +146,21 @@ namespace NiceHashBot
                            (OrderPanels[i].order.MaxPrice == OrderPanels[j].order.MaxPrice)
                            &&
                            (OrderPanels[i].order.Limit == OrderPanels[j].order.Limit)
+                           &&
+                           ((OrderPanels[i].Sync == -1) && (OrderPanels[j].Sync == -1))
+                           &&
+                           (
+                            (OrderPanels[i].order.OrderStats != null) && (OrderPanels[j].order.OrderStats != null)
+                            ||
+                            (OrderPanels[i].order.OrderStats == null) && (OrderPanels[j].order.OrderStats == null)
+                           )
                        )
                         {
-                            OrderPanels[j].position = pos;                            
+                            OrderPanels[j].position = pos;
+
+                            OrderPanels[i].Sync = OrderPanels[j].order.ID;
+                            OrderPanels[j].Sync = OrderPanels[i].order.ID;
+
                             found = true;
                         }                       
                 }
@@ -172,6 +203,47 @@ namespace NiceHashBot
         {
         }
 
+        private void RemoveAllButton_Click(object sender, EventArgs e)
+        {
+            bool empty = true;
+
+            OrderContainer[] Orders = OrderContainer.GetAll();
+            for (int i = Orders.Length - 1; i >= 0; i--)
+                if (Orders[i].Algorithm == AlgorithmComboBox.SelectedIndex)
+                    empty = false;
+            if (empty) return;
+
+            string algo = APIWrapper.ALGORITHM_NAME[AlgorithmComboBox.SelectedIndex];
+            DialogResult dialogResult = MessageBox.Show("Are you sure you want to remove all [" + algo + "] orders?", "Warning", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {                
+                for (int i = Orders.Length - 1; i >= 0; i--)
+                    if (Orders[i].Algorithm == AlgorithmComboBox.SelectedIndex)
+                        OrderContainer.Remove(i);
+            }
+            Refresh();
+        }
+
+        private void OvPriceConfirmButton_Click(object sender, EventArgs e)
+        {
+            OrderContainer[] Orders = OrderContainer.GetAll();
+            for (int i = Orders.Length - 1; i >= 0; i--)
+                if (Orders[i].Algorithm == AlgorithmComboBox.SelectedIndex)
+                    if (Orders[i].OrderStats != null)
+                        Orders[i].MaxPrice = Convert.ToDouble(OvPriceTextBox.Text);
+            Refresh();
+        }
+
+        private void OvSpeedConfirmButton_Click(object sender, EventArgs e)
+        {
+            OrderContainer[] Orders = OrderContainer.GetAll();
+            for (int i = Orders.Length - 1; i >= 0; i--)
+                if (Orders[i].Algorithm == AlgorithmComboBox.SelectedIndex)
+                    if (Orders[i].OrderStats != null)
+                        Orders[i].Limit = Convert.ToDouble(OvSpeedTextBox.Text);
+            Refresh();
+        }
+
         private void USConfirmButton_Click(object sender, EventArgs e)
         {
             if (PoolComboBox.SelectedIndex < 0)
@@ -188,6 +260,8 @@ namespace NiceHashBot
                 OrderID++;
             else
                 MessageBox.Show("Error creating order", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            Refresh();
         }
 
         private void EUConfirmButton_Click(object sender, EventArgs e)
@@ -213,8 +287,8 @@ namespace NiceHashBot
                     OrderID++;
                 else
                     MessageBox.Show("Error creating order", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
             }
+            Refresh();
         }
     }
 }

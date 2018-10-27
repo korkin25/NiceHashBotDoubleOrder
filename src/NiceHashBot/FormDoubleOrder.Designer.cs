@@ -47,6 +47,7 @@
             this.EUConfirmButton = new System.Windows.Forms.Button();
             this.USConfirmButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
             this.USPanel = new System.Windows.Forms.Panel();
             this.LinkButton = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -68,15 +69,14 @@
             this.USOrderPanel = new System.Windows.Forms.Panel();
             this.SyncOrderPanel = new System.Windows.Forms.Panel();
             this.MainOrderPanel = new System.Windows.Forms.Panel();
-            this.panel6 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.USPanel.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
             this.MainOrderPanel.SuspendLayout();
-            this.panel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // AlgorithmComboBox
@@ -118,7 +118,7 @@
             // BalanceTitleLabel
             // 
             this.BalanceTitleLabel.AutoSize = true;
-            this.BalanceTitleLabel.Location = new System.Drawing.Point(231, 11);
+            this.BalanceTitleLabel.Location = new System.Drawing.Point(231, 10);
             this.BalanceTitleLabel.Name = "BalanceTitleLabel";
             this.BalanceTitleLabel.Size = new System.Drawing.Size(49, 13);
             this.BalanceTitleLabel.TabIndex = 7;
@@ -127,9 +127,10 @@
             // BalanceLabel
             // 
             this.BalanceLabel.AutoSize = true;
-            this.BalanceLabel.Location = new System.Drawing.Point(275, 11);
+            this.BalanceLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.BalanceLabel.Location = new System.Drawing.Point(275, 10);
             this.BalanceLabel.Name = "BalanceLabel";
-            this.BalanceLabel.Size = new System.Drawing.Size(82, 13);
+            this.BalanceLabel.Size = new System.Drawing.Size(95, 13);
             this.BalanceLabel.TabIndex = 9;
             this.BalanceLabel.Text = "0,0000000 BTC";
             // 
@@ -165,7 +166,7 @@
             // USSpeedLabel
             // 
             this.USSpeedLabel.AutoSize = true;
-            this.USSpeedLabel.Location = new System.Drawing.Point(141, 17);
+            this.USSpeedLabel.Location = new System.Drawing.Point(59, 17);
             this.USSpeedLabel.Name = "USSpeedLabel";
             this.USSpeedLabel.Size = new System.Drawing.Size(36, 13);
             this.USSpeedLabel.TabIndex = 13;
@@ -183,7 +184,7 @@
             // USPriceLabel
             // 
             this.USPriceLabel.AutoSize = true;
-            this.USPriceLabel.Location = new System.Drawing.Point(59, 17);
+            this.USPriceLabel.Location = new System.Drawing.Point(141, 17);
             this.USPriceLabel.Name = "USPriceLabel";
             this.USPriceLabel.Size = new System.Drawing.Size(30, 13);
             this.USPriceLabel.TabIndex = 15;
@@ -205,14 +206,14 @@
             // 
             // USSpeedTextBox
             // 
-            this.USSpeedTextBox.Location = new System.Drawing.Point(117, 31);
+            this.USSpeedTextBox.Location = new System.Drawing.Point(35, 31);
             this.USSpeedTextBox.Name = "USSpeedTextBox";
             this.USSpeedTextBox.Size = new System.Drawing.Size(80, 20);
             this.USSpeedTextBox.TabIndex = 19;
             // 
             // USPriceTextBox
             // 
-            this.USPriceTextBox.Location = new System.Drawing.Point(35, 31);
+            this.USPriceTextBox.Location = new System.Drawing.Point(117, 31);
             this.USPriceTextBox.Name = "USPriceTextBox";
             this.USPriceTextBox.Size = new System.Drawing.Size(80, 20);
             this.USPriceTextBox.TabIndex = 18;
@@ -247,6 +248,15 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(449, 58);
             this.panel1.TabIndex = 23;
+            // 
+            // panel6
+            // 
+            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel6.Controls.Add(this.USPanel);
+            this.panel6.Location = new System.Drawing.Point(248, -1);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(200, 58);
+            this.panel6.TabIndex = 29;
             // 
             // USPanel
             // 
@@ -326,13 +336,14 @@
             this.RemoveAllButton.TabIndex = 25;
             this.RemoveAllButton.Text = "X";
             this.RemoveAllButton.UseVisualStyleBackColor = true;
+            this.RemoveAllButton.Click += new System.EventHandler(this.RemoveAllButton_Click);
             // 
             // panel4
             // 
             this.panel4.Controls.Add(this.OvSpeedTextBox);
             this.panel4.Controls.Add(this.OvSpeedConfirmButton);
             this.panel4.Controls.Add(this.OvSpeedLabel);
-            this.panel4.Location = new System.Drawing.Point(223, 5);
+            this.panel4.Location = new System.Drawing.Point(101, 5);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(124, 30);
             this.panel4.TabIndex = 24;
@@ -352,6 +363,7 @@
             this.OvSpeedConfirmButton.TabIndex = 1;
             this.OvSpeedConfirmButton.Text = "OK";
             this.OvSpeedConfirmButton.UseVisualStyleBackColor = true;
+            this.OvSpeedConfirmButton.Click += new System.EventHandler(this.OvSpeedConfirmButton_Click);
             // 
             // OvSpeedLabel
             // 
@@ -367,7 +379,7 @@
             this.panel3.Controls.Add(this.OvPriceTextBox);
             this.panel3.Controls.Add(this.OvPriceConfirmButton);
             this.panel3.Controls.Add(this.OvPriceLabel);
-            this.panel3.Location = new System.Drawing.Point(97, 5);
+            this.panel3.Location = new System.Drawing.Point(224, 5);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(124, 30);
             this.panel3.TabIndex = 2;
@@ -387,6 +399,7 @@
             this.OvPriceConfirmButton.TabIndex = 1;
             this.OvPriceConfirmButton.Text = "OK";
             this.OvPriceConfirmButton.UseVisualStyleBackColor = true;
+            this.OvPriceConfirmButton.Click += new System.EventHandler(this.OvPriceConfirmButton_Click);
             // 
             // OvPriceLabel
             // 
@@ -409,7 +422,7 @@
             // OnTopCheckBox
             // 
             this.OnTopCheckBox.AutoSize = true;
-            this.OnTopCheckBox.Location = new System.Drawing.Point(383, 10);
+            this.OnTopCheckBox.Location = new System.Drawing.Point(383, 9);
             this.OnTopCheckBox.Name = "OnTopCheckBox";
             this.OnTopCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.OnTopCheckBox.Size = new System.Drawing.Size(58, 17);
@@ -454,15 +467,6 @@
             this.MainOrderPanel.Size = new System.Drawing.Size(467, 401);
             this.MainOrderPanel.TabIndex = 31;
             // 
-            // panel6
-            // 
-            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel6.Controls.Add(this.USPanel);
-            this.panel6.Location = new System.Drawing.Point(248, -1);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(200, 58);
-            this.panel6.TabIndex = 29;
-            // 
             // FormDoubleOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -478,11 +482,13 @@
             this.Controls.Add(this.PoolLabel);
             this.Controls.Add(this.AlgorithmComboBox);
             this.Controls.Add(this.AlgorithmLabel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FormDoubleOrder";
             this.Text = "Orders";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormDoubleOrder_FormClosing);
             this.Load += new System.EventHandler(this.FormDoubleOrder_Load);
             this.panel1.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
             this.USPanel.ResumeLayout(false);
             this.USPanel.PerformLayout();
             this.panel5.ResumeLayout(false);
@@ -494,7 +500,6 @@
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.MainOrderPanel.ResumeLayout(false);
-            this.panel6.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

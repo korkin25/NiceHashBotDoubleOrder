@@ -40,3 +40,12 @@ C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\NiceHashBot\obj\x8
 C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\NiceHashBot\obj\x86\Debug\NiceHashBot.csproj.CopyComplete
 C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\NiceHashBot\obj\x86\Debug\NiceHashBot.exe
 C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\NiceHashBot\obj\x86\Debug\NiceHashBot.pdb
+C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\NiceHashBot\bin\Debug\Microsoft.Threading.Tasks.dll
+C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\NiceHashBot\bin\Debug\Microsoft.Threading.Tasks.Extensions.Desktop.dll
+C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\NiceHashBot\bin\Debug\Microsoft.Threading.Tasks.Extensions.dll
+C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\NiceHashBot\bin\Debug\StackExchange.Redis.dll
+C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\NiceHashBot\bin\Debug\Microsoft.Threading.Tasks.xml
+C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\NiceHashBot\bin\Debug\Microsoft.Threading.Tasks.Extensions.xml
+C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\NiceHashBot\bin\Debug\Microsoft.Threading.Tasks.Extensions.Desktop.xml
+C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\NiceHashBot\bin\Debug\StackExchange.Redis.pdb
+C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\NiceHashBot\bin\Debug\StackExchange.Redis.xml

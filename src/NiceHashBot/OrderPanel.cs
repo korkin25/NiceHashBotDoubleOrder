@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,12 +11,24 @@ namespace NiceHashBot
     class OrderPanel
     {
         public int position = -1;
-        public OrderContainer order;
+        public OrderContainer order;        
 
         public Panel panel;
         private EventHandler TimerRefresh;
         private int height;
         private int id;
+        private Label IDLabel;
+
+        private int sync = -1;
+        public int Sync
+        {
+            set
+            {
+                sync = value;
+                IDLabel.Text = "# " + order.ID.ToString() + " (sync with [" + value.ToString() + "])";
+            }
+            get { return sync; }
+        }
 
         public OrderPanel(int id, OrderContainer order, EventHandler TimerRefresh)
         {
@@ -42,19 +55,21 @@ namespace NiceHashBot
 
         private void FillPanel()
         {
-            panel.Controls.Add(new Label
-            {
+
+            IDLabel = new Label
+            { 
                 Text = "# " + order.ID.ToString(),
                 Location = new System.Drawing.Point(5, 7),
                 AutoSize = true,
-            });
+            };
+            panel.Controls.Add(IDLabel);
 
             var DeleteButton = new Button
             {
                 Text = "X",
                 Location = new System.Drawing.Point(170, 3),
                 Width = 25,
-                BackColor = System.Drawing.Color.White,
+                BackColor = SystemColors.ButtonFace,
             };
             panel.Controls.Add(DeleteButton);
             DeleteButton.Click += (o, args) =>
@@ -101,13 +116,25 @@ namespace NiceHashBot
                 Text = "Set",
                 Location = new System.Drawing.Point(145, 30),
                 Width = 50,
-                BackColor = System.Drawing.Color.White,
+                BackColor = SystemColors.ButtonFace,
             };
             panel.Controls.Add(SetButton);
             SetButton.Click += (o, args) =>
             {
                 order.Limit = Convert.ToDouble(LimitTextBox.Text);
                 order.MaxPrice = Convert.ToDouble(PriceTextBox.Text) + Convert.ToDouble(AddBitsTextBox.Text) * 0.0001;
+                if (Sync != -1)
+                {
+                    OrderContainer[] Orders = OrderContainer.GetAll();
+                    foreach(OrderContainer Order in Orders)
+                    {
+                        if (Order.ID == Sync)
+                        {
+                            Order.Limit = Convert.ToDouble(LimitTextBox.Text);
+                            Order.MaxPrice = Convert.ToDouble(PriceTextBox.Text) + Convert.ToDouble(AddBitsTextBox.Text) * 0.0001;
+                        }
+                    }
+                }
             };
             SetButton.Click += TimerRefresh;
 
@@ -116,7 +143,7 @@ namespace NiceHashBot
                 Text = "Refill",
                 Location = new System.Drawing.Point(145, 57),
                 Width = 50,
-                BackColor = System.Drawing.Color.White,
+                BackColor = SystemColors.ButtonFace,
             };
             panel.Controls.Add(RefillButton);
             RefillButton.Click += (o, args) =>
@@ -126,10 +153,6 @@ namespace NiceHashBot
             RefillButton.Click += TimerRefresh;
         }
 
-        private void DeleteButton_Click(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
 
         public void Place(ref Panel place, ref Panel SyncOrderPanel)
         {
@@ -140,6 +163,25 @@ namespace NiceHashBot
 
             panel.Location = new System.Drawing.Point(-1, (height - 1) * position);
             place.Controls.Add(panel);
+
+            if (Sync != -1)
+            {
+                Button DesyncButton = new Button
+                {
+                    //Location = new System.Drawing.Point(0, panel.Location.Y + height / 2 - 5),
+                    Location = new System.Drawing.Point(0, panel.Location.Y),
+                    //Text = "",
+                    BackColor = SystemColors.ButtonFace,
+                    Height = height,
+                    Width = SyncOrderPanel.Width - 2,
+                    Image = Properties.Resources.link_icon_black1,
+                };
+                DesyncButton.Click += (ob, args) =>
+                {
+
+                };
+                SyncOrderPanel.Controls.Add(DesyncButton);
+            }
         }
     }
 }
