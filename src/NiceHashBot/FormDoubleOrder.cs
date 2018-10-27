@@ -22,8 +22,8 @@ namespace NiceHashBot
         double MaxPriceBuffer;
         double StartAmount = 0.005;
 
-        //double StartPrice = 0.001;
-        double StartPrice = 0;
+        double StartPrice = 0.001;
+        //double StartPrice = 0;
 
         int OrderID = 0;
 
@@ -112,6 +112,7 @@ namespace NiceHashBot
                 else if (panel.order.ServiceLocation == 1)
                     panel.Place(ref USOrderPanel, ref SyncOrderPanel);
             }
+            SyncOrderPanel.Height = EUOrderPanel.Height > USOrderPanel.Height ? EUOrderPanel.Height : USOrderPanel.Height;
         }
 
         private void PositionPanels(ref List<OrderPanel> OrderPanels)
@@ -119,27 +120,18 @@ namespace NiceHashBot
             int pos = 0;
             bool found;
 
-            string path = System.IO.Path.GetDirectoryName(Application.ExecutablePath);
-            if (File.Exists(Path.Combine(path, "SyncData")))
-            {
-                //do stuff
-                Console.WriteLine("File exists");
-            }
-            else
-            {
-                Console.WriteLine("File does not exist");
-            }
-
             for (int i = 0; i < OrderPanels.Count; i++)
             {
                 if (OrderPanels[i].position != -1) continue;
                 OrderPanels[i].position = pos;
+                List<string> Desyncs = DesyncController.GetAll();               
 
                 found = false;
 
                 for (int j = i + 1; j < OrderPanels.Count; j++)
                 {
                     if (found) continue;
+
                     if (
                            (OrderPanels[i].order.ServiceLocation != OrderPanels[j].order.ServiceLocation)
                            &&
@@ -154,9 +146,24 @@ namespace NiceHashBot
                             ||
                             (OrderPanels[i].order.OrderStats == null) && (OrderPanels[j].order.OrderStats == null)
                            )
+                           //&&
+                           //()
                        )
                         {
-                            OrderPanels[j].position = pos;
+                        string checkForth = OrderPanels[i].order.ID.ToString() + ":" + OrderPanels[j].order.ID.ToString();
+                        string checkBack  = OrderPanels[j].order.ID.ToString() + ":" + OrderPanels[i].order.ID.ToString();
+                        bool quit = false;
+                        foreach (string desync in Desyncs)
+                        {
+                            if ((checkForth == desync) || (checkBack == desync))
+                            {
+                                quit = true;
+                                continue;
+                            }
+                        }
+                        if (quit) continue;
+
+                        OrderPanels[j].position = pos;
 
                             OrderPanels[i].Sync = OrderPanels[j].order.ID;
                             OrderPanels[j].Sync = OrderPanels[i].order.ID;
@@ -242,6 +249,11 @@ namespace NiceHashBot
                     if (Orders[i].OrderStats != null)
                         Orders[i].Limit = Convert.ToDouble(OvSpeedTextBox.Text);
             Refresh();
+        }
+
+        private void FindOrdersButton_Click(object sender, EventArgs e)
+        {
+            DesyncController.Delete();
         }
 
         private void USConfirmButton_Click(object sender, EventArgs e)

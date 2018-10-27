@@ -66,5 +66,73 @@
     "StartingPrice": 0.0,
     "StartingAmount": 0.005,
     "HandlerDLL": ""
+  },
+  {
+    "ID": 4,
+    "Algorithm": 0,
+    "ServiceLocation": 0,
+    "MaxPrice": 0.001,
+    "Limit": 0.0,
+    "PoolData": {
+      "Label": "MyPool1",
+      "Host": "stratum.mychosenpool.com",
+      "Port": 3333,
+      "User": "user",
+      "Password": "x"
+    },
+    "StartingPrice": 0.0,
+    "StartingAmount": 0.005,
+    "HandlerDLL": ""
+  },
+  {
+    "ID": 5,
+    "Algorithm": 0,
+    "ServiceLocation": 1,
+    "MaxPrice": 0.001,
+    "Limit": 0.0,
+    "PoolData": {
+      "Label": "MyPool1",
+      "Host": "stratum.mychosenpool.com",
+      "Port": 3333,
+      "User": "user",
+      "Password": "x"
+    },
+    "StartingPrice": 0.0,
+    "StartingAmount": 0.005,
+    "HandlerDLL": ""
+  },
+  {
+    "ID": 6,
+    "Algorithm": 0,
+    "ServiceLocation": 0,
+    "MaxPrice": 0.001,
+    "Limit": 0.0,
+    "PoolData": {
+      "Label": "MyPool1",
+      "Host": "stratum.mychosenpool.com",
+      "Port": 3333,
+      "User": "user",
+      "Password": "x"
+    },
+    "StartingPrice": 0.0,
+    "StartingAmount": 0.005,
+    "HandlerDLL": ""
+  },
+  {
+    "ID": 7,
+    "Algorithm": 0,
+    "ServiceLocation": 1,
+    "MaxPrice": 0.001,
+    "Limit": 0.0,
+    "PoolData": {
+      "Label": "MyPool1",
+      "Host": "stratum.mychosenpool.com",
+      "Port": 3333,
+      "User": "user",
+      "Password": "x"
+    },
+    "StartingPrice": 0.0,
+    "StartingAmount": 0.005,
+    "HandlerDLL": ""
   }
 ]

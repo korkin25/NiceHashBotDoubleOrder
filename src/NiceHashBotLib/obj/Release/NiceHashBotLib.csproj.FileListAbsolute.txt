@@ -1,0 +1,10 @@
+C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\NiceHashBotLib\bin\Release\NiceHashBotLib.dll
+C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\NiceHashBotLib\bin\Release\NiceHashBotLib.pdb
+C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\NiceHashBotLib\bin\Release\Newtonsoft.Json.dll
+C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\NiceHashBotLib\bin\Release\Newtonsoft.Json.pdb
+C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\NiceHashBotLib\bin\Release\Newtonsoft.Json.xml
+C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\NiceHashBotLib\obj\Release\NiceHashBotLib.csprojAssemblyReference.cache
+C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\NiceHashBotLib\obj\Release\NiceHashBotLib.csproj.CoreCompileInputs.cache
+C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\NiceHashBotLib\obj\Release\NiceHashBotLib.csproj.CopyComplete
+C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\NiceHashBotLib\obj\Release\NiceHashBotLib.dll
+C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\NiceHashBotLib\obj\Release\NiceHashBotLib.pdb

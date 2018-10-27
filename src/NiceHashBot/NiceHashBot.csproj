@@ -65,6 +65,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DesyncController.cs" />
     <Compile Include="FormDoubleOrder.cs">
       <SubType>Form</SubType>
     </Compile>

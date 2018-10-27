@@ -25,7 +25,7 @@ namespace NiceHashBot
             set
             {
                 sync = value;
-                IDLabel.Text = "# " + order.ID.ToString() + " (sync with [" + value.ToString() + "])";
+                //IDLabel.Text = "# " + order.ID.ToString() + " (sync with [" + value.ToString() + "])";
             }
             get { return sync; }
         }
@@ -157,9 +157,13 @@ namespace NiceHashBot
         public void Place(ref Panel place, ref Panel SyncOrderPanel)
         {
             if (height * (position + 1) > 400)
+            {
                 place.Size = new System.Drawing.Size(place.Size.Width, height * (position + 1));
+            }                
             else
+            {
                 place.Size = new System.Drawing.Size(place.Size.Width, 400);
+            }               
 
             panel.Location = new System.Drawing.Point(-1, (height - 1) * position);
             place.Controls.Add(panel);
@@ -177,9 +181,10 @@ namespace NiceHashBot
                     Image = Properties.Resources.link_icon_black1,
                 };
                 DesyncButton.Click += (ob, args) =>
-                {
-
+                {                    
+                    DesyncController.Add(order.ID.ToString(), Sync.ToString());
                 };
+                DesyncButton.Click += TimerRefresh;
                 SyncOrderPanel.Controls.Add(DesyncButton);
             }
         }

@@ -418,6 +418,7 @@
             this.FindOrdersButton.Size = new System.Drawing.Size(30, 30);
             this.FindOrdersButton.TabIndex = 1;
             this.FindOrdersButton.UseVisualStyleBackColor = true;
+            this.FindOrdersButton.Click += new System.EventHandler(this.FindOrdersButton_Click);
             // 
             // OnTopCheckBox
             // 
