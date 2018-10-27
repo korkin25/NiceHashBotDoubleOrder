@@ -159,8 +159,8 @@ namespace NiceHashBot
         private void FormMain_Load(object sender, EventArgs e)
         {
             settingsToolStripMenuItem_Click(sender, e);
-            FormDoubleOrderInstance = new FormDoubleOrder();
-            FormDoubleOrderInstance.Show();
+            //FormDoubleOrderInstance = new FormDoubleOrder();
+            //FormDoubleOrderInstance.Show();
         }
 
         private void setToUnlimitedToolStripMenuItem_Click(object sender, EventArgs e)

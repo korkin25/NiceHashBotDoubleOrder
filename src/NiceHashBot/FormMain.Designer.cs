@@ -35,6 +35,7 @@ namespace NiceHashBot
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.orderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createNewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newFormToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.poolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -55,7 +56,6 @@ namespace NiceHashBot
             this.setToUnlimitedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setToToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setMaximalPriceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newFormToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -86,9 +86,16 @@ namespace NiceHashBot
             // 
             this.createNewToolStripMenuItem.Enabled = false;
             this.createNewToolStripMenuItem.Name = "createNewToolStripMenuItem";
-            this.createNewToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.createNewToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.createNewToolStripMenuItem.Text = "Create new";
             this.createNewToolStripMenuItem.Click += new System.EventHandler(this.createNewToolStripMenuItem_Click);
+            // 
+            // newFormToolStripMenuItem
+            // 
+            this.newFormToolStripMenuItem.Name = "newFormToolStripMenuItem";
+            this.newFormToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.newFormToolStripMenuItem.Text = "New Form";
+            this.newFormToolStripMenuItem.Click += new System.EventHandler(this.newFormToolStripMenuItem_Click);
             // 
             // poolsToolStripMenuItem
             // 
@@ -238,13 +245,6 @@ namespace NiceHashBot
             this.setMaximalPriceToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
             this.setMaximalPriceToolStripMenuItem.Text = "Set maximal price";
             this.setMaximalPriceToolStripMenuItem.Click += new System.EventHandler(this.setMaximalPriceToolStripMenuItem_Click);
-            // 
-            // newFormToolStripMenuItem
-            // 
-            this.newFormToolStripMenuItem.Name = "newFormToolStripMenuItem";
-            this.newFormToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.newFormToolStripMenuItem.Text = "New Form";
-            this.newFormToolStripMenuItem.Click += new System.EventHandler(this.newFormToolStripMenuItem_Click);
             // 
             // FormMain
             // 

@@ -63,6 +63,10 @@ namespace NiceHashBot
                 AutoSize = true,
             };
             panel.Controls.Add(IDLabel);
+            IDLabel.Click += (o, args) =>
+            {
+                System.Diagnostics.Process.Start("https://www.nicehash.com/order/" + order.ID.ToString());
+            };
 
             var DeleteButton = new Button
             {
@@ -106,8 +110,15 @@ namespace NiceHashBot
 
             panel.Controls.Add(new Label
             {
+                Text = "Speed: " + order.OrderStats.Speed + " (" + order.OrderStats.Workers + " workers)",
+                Location = new System.Drawing.Point(5, 55),
+                AutoSize = true,
+            });
+
+            panel.Controls.Add(new Label
+            {
                 Text = "Availiable BTC: " + order.OrderStats.BTCAvailable,
-                Location = new System.Drawing.Point(5, 63),
+                Location = new System.Drawing.Point(5, 75),
                 AutoSize = true,
             });
 
@@ -141,7 +152,7 @@ namespace NiceHashBot
             var RefillButton = new Button
             {
                 Text = "Refill",
-                Location = new System.Drawing.Point(145, 57),
+                Location = new System.Drawing.Point(145, 68),
                 Width = 50,
                 BackColor = SystemColors.ButtonFace,
             };

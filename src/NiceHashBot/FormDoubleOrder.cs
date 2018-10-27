@@ -43,7 +43,6 @@ namespace NiceHashBot
             TimerRefresh.Tick += new EventHandler(TimerRefresh_Tick);
             TimerRefresh.Start();
             TimerRefresh_Tick(null, null);
-            FindOrdersButton.Click += new EventHandler(TimerRefresh_Tick);
             AlgorithmComboBox.SelectedIndexChanged += new EventHandler(TimerRefresh_Tick);
             PoolComboBox.SelectedIndexChanged += new EventHandler(TimerRefresh_Tick);
 
@@ -142,9 +141,9 @@ namespace NiceHashBot
                            ((OrderPanels[i].Sync == -1) && (OrderPanels[j].Sync == -1))
                            &&
                            (
-                            (OrderPanels[i].order.OrderStats != null) && (OrderPanels[j].order.OrderStats != null)
-                            ||
-                            (OrderPanels[i].order.OrderStats == null) && (OrderPanels[j].order.OrderStats == null)
+                               (OrderPanels[i].order.OrderStats != null) && (OrderPanels[j].order.OrderStats != null)
+                               ||
+                               (OrderPanels[i].order.OrderStats == null) && (OrderPanels[j].order.OrderStats == null)
                            )
                            //&&
                            //()
@@ -254,6 +253,7 @@ namespace NiceHashBot
         private void FindOrdersButton_Click(object sender, EventArgs e)
         {
             DesyncController.Delete();
+            Refresh();            
         }
 
         private void USConfirmButton_Click(object sender, EventArgs e)
