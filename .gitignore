@@ -52,3 +52,8 @@ src/NiceHashBot/bin/Release/NiceHashBotLib.pdb
 src/NiceHashBot/bin/Release/orders.json
 src/NiceHashBot/bin/Release/NiceHashBotLib.pdb
 src/NiceHashBot/bin/Release/NiceHashBot.pdb
+src/.vs/NHB/v15/.suo
+src/NiceHashBot/bin/Debug/NiceHashBot.pdb
+src/NiceHashBot/obj/x86/Debug/NiceHashBot.pdb
+src/NiceHashBot/obj/x86/Release/NiceHashBot.pdb
+src/NiceHashBot/bin/Release/NiceHashBot.pdb

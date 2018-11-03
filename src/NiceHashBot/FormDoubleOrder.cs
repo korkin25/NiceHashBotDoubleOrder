@@ -229,6 +229,7 @@ namespace NiceHashBot
                 {                    
                     pleaseWait.StartPosition = FormStartPosition.CenterScreen;
                     pleaseWait.Show();
+                    //
                     await DeleteAsync(Orders);
                     pleaseWait.Close();
                 }
