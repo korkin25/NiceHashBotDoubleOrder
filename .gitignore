@@ -57,3 +57,5 @@ src/NiceHashBot/bin/Debug/NiceHashBot.pdb
 src/NiceHashBot/obj/x86/Debug/NiceHashBot.pdb
 src/NiceHashBot/obj/x86/Release/NiceHashBot.pdb
 src/NiceHashBot/bin/Release/NiceHashBot.pdb
+src/.vs/NHB/v15/Server/sqlite3/storage.ide-wal
+src/.vs/NHB/v15/.suo
