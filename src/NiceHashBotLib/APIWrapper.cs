@@ -199,6 +199,7 @@ namespace NiceHashBotLib
         /// <param name="Algorithm">Algorithm number.</param>
         /// <param name="ForceReCache">Set this to true to recache order list.</param>
         /// <returns>Array list of orders.</returns>
+        /// 
         public static List<Order> GetAllOrders(int ServiceLocation, int Algorithm, bool ForceReCache)
         {
             lock (CacheLock)

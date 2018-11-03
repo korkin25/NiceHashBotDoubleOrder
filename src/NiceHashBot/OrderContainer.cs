@@ -152,7 +152,8 @@ namespace NiceHashBot
             if (TextData != null)
             {
                 OrderList = JsonConvert.DeserializeObject<List<OrderContainer>>(TextData);
-                foreach (OrderContainer OC in OrderList)
+
+                foreach (OrderContainer OC in OrderList) 
                     OC.Launch();
             }
             else
@@ -169,7 +170,7 @@ namespace NiceHashBot
         }
 
 
-        private static void Commit()
+        public static void Commit()
         {
             string TextData = JsonConvert.SerializeObject(OrderList, Formatting.Indented);
             File.WriteAllText("orders.json", TextData);
@@ -180,7 +181,7 @@ namespace NiceHashBot
         {
             OrderContainer[] OArray = OrderList.ToArray();
             foreach (OrderContainer OC in OArray)
-                OC.RefreshStats();
+                OC.RefreshStats();            
 
             return OArray;
         }

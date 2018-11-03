@@ -10,3 +10,15 @@ C:\Users\DeadEndKing\Documents\git\NiceHashBot\src\HandlerExample\obj\Debug\Hand
 C:\Users\DeadEndKing\Documents\git\NiceHashBot\src\HandlerExample\obj\Debug\HandlerExample.csproj.CopyComplete
 C:\Users\DeadEndKing\Documents\git\NiceHashBot\src\HandlerExample\obj\Debug\HandlerExample.dll
 C:\Users\DeadEndKing\Documents\git\NiceHashBot\src\HandlerExample\obj\Debug\HandlerExample.pdb
+C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\HandlerExample\bin\Debug\HandlerExample.dll
+C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\HandlerExample\bin\Debug\HandlerExample.pdb
+C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\HandlerExample\bin\Debug\Newtonsoft.Json.dll
+C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\HandlerExample\bin\Debug\NiceHashBotLib.dll
+C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\HandlerExample\bin\Debug\NiceHashBotLib.pdb
+C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\HandlerExample\bin\Debug\Newtonsoft.Json.pdb
+C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\HandlerExample\bin\Debug\Newtonsoft.Json.xml
+C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\HandlerExample\obj\Debug\HandlerExample.csprojAssemblyReference.cache
+C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\HandlerExample\obj\Debug\HandlerExample.csproj.CoreCompileInputs.cache
+C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\HandlerExample\obj\Debug\HandlerExample.csproj.CopyComplete
+C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\HandlerExample\obj\Debug\HandlerExample.dll
+C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\HandlerExample\obj\Debug\HandlerExample.pdb

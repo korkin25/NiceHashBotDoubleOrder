@@ -49,3 +49,4 @@ C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\NiceHashBot\bin\De
 C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\NiceHashBot\bin\Debug\Microsoft.Threading.Tasks.Extensions.Desktop.xml
 C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\NiceHashBot\bin\Debug\StackExchange.Redis.pdb
 C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\NiceHashBot\bin\Debug\StackExchange.Redis.xml
+C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\NiceHashBot\obj\x86\Debug\NiceHashBot.FormPleaseWait.resources

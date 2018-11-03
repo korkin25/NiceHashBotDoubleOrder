@@ -28,3 +28,4 @@ C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\NiceHashBot\obj\x8
 C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\NiceHashBot\obj\x86\Release\NiceHashBot.csproj.CopyComplete
 C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\NiceHashBot\obj\x86\Release\NiceHashBot.exe
 C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\NiceHashBot\obj\x86\Release\NiceHashBot.pdb
+C:\Users\DeadEndKing\Documents\git\NiceHashBotDoubleOrder\src\NiceHashBot\obj\x86\Release\NiceHashBot.FormPleaseWait.resources

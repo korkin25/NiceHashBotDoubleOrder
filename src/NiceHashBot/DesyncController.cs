@@ -26,21 +26,26 @@ namespace NiceHashBot
         public static List<string> GetAll()
         {
             List<string> result = new List<string>();
-            String readString;
-            try
+            String readString = "";
+
+            if (File.Exists(GetFilePath()))
             {
-                using (StreamReader sr = new StreamReader(GetFilePath()))
+                try
                 {
-                    readString = sr.ReadToEnd();
-                    Console.WriteLine(readString);
+                    using (StreamReader sr = new StreamReader(GetFilePath()))
+                    {
+                        readString = sr.ReadToEnd();
+                        Console.WriteLine(readString);
+                    }
+                }
+                catch (Exception e)
+                {
+                    /*Console.WriteLine("The file could not be read:");
+                    Console.WriteLine(e.Message);*/
+                    return result;
                 }
             }
-            catch (Exception e)
-            {
-                Console.WriteLine("The file could not be read:");
-                Console.WriteLine(e.Message);
-                return result;
-            }
+                
             while (readString.Length > 0)
             {
                 int space = readString.IndexOf(" ");
@@ -66,7 +71,7 @@ namespace NiceHashBot
             }
             catch(Exception Ex)
             {
-                Console.WriteLine(Ex);
+                /*Console.WriteLine(Ex);*/
             }
             CleanUp();
         }

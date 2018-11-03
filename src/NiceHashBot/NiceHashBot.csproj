@@ -90,6 +90,12 @@
     <Compile Include="FormNumberInput.Designer.cs">
       <DependentUpon>FormNumberInput.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormPleaseWait.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPleaseWait.Designer.cs">
+      <DependentUpon>FormPleaseWait.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormPool.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -124,6 +130,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormNumberInput.resx">
       <DependentUpon>FormNumberInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPleaseWait.resx">
+      <DependentUpon>FormPleaseWait.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormPool.resx">
       <DependentUpon>FormPool.cs</DependentUpon>

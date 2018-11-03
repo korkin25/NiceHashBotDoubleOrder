@@ -91,6 +91,7 @@ namespace NiceHashBot
 
             if (!APIWrapper.ValidAuthorization) return;
 
+            //APIWrapper.GetAllOrders();
             OrderContainer[] Orders = OrderContainer.GetAll();
             if (Orders.Count() > OrderID) OrderID = Orders.Count();
 
@@ -177,7 +178,7 @@ namespace NiceHashBot
         public void RefreshPoolList()
         {
             PoolComboBox.Items.Clear();
-
+            
             Pools = PoolContainer.GetAll();
             foreach (Pool P in Pools)
             {
@@ -209,7 +210,7 @@ namespace NiceHashBot
         {
         }
 
-        private void RemoveAllButton_Click(object sender, EventArgs e)
+        private async void RemoveAllButton_Click(object sender, EventArgs e)
         {
             bool empty = true;
 
@@ -222,12 +223,33 @@ namespace NiceHashBot
             string algo = APIWrapper.ALGORITHM_NAME[AlgorithmComboBox.SelectedIndex];
             DialogResult dialogResult = MessageBox.Show("Are you sure you want to remove all [" + algo + "] orders?", "Warning", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
-            {                
-                for (int i = Orders.Length - 1; i >= 0; i--)
-                    if (Orders[i].Algorithm == AlgorithmComboBox.SelectedIndex)
-                        OrderContainer.Remove(i);
+            {
+                FormPleaseWait pleaseWait = new FormPleaseWait();
+                try
+                {                    
+                    pleaseWait.StartPosition = FormStartPosition.CenterScreen;
+                    pleaseWait.Show();
+                    await DeleteAsync(Orders);
+                    pleaseWait.Close();
+                }
+                catch(Exception ex) { Console.WriteLine(ex); }
+                
             }
             Refresh();
+        }
+
+        private async Task<bool> DeleteAsync(OrderContainer[] Orders)
+        {
+            bool wait = false;
+
+            for (int i = Orders.Length - 1; i >= 0; i--)
+                if (Orders[i].Algorithm == AlgorithmComboBox.SelectedIndex)
+                {
+                    if (wait) await Task.Delay(1100);
+                    OrderContainer.Remove(i);
+                    wait = true;
+                }                    
+            return true;
         }
 
         private void OvPriceConfirmButton_Click(object sender, EventArgs e)
@@ -253,6 +275,28 @@ namespace NiceHashBot
         private void FindOrdersButton_Click(object sender, EventArgs e)
         {
             DesyncController.Delete();
+
+            List<Order> orders = new List<Order>();
+            foreach (Order order in APIWrapper.GetMyOrders(0, AlgorithmComboBox.SelectedIndex))
+            {
+                orders.Add(order);
+            }
+            foreach (Order order in APIWrapper.GetMyOrders(1, AlgorithmComboBox.SelectedIndex))
+            {
+                orders.Add(order);
+            }
+
+            OrderContainer[] localOrders = OrderContainer.GetAll();
+            foreach(Order order in orders)
+            {
+                bool exists = false;
+                foreach (OrderContainer orderContainer in localOrders)
+                    if (orderContainer.ID == order.ID)
+                        exists = true;
+                if (!exists)
+                    OrderContainer.Add(order.ServiceLocation, order.Algorithm, order.Price, order.SpeedLimit, new Pool(), order.ID, 0.001, 0.005, "");
+            }
+
             Refresh();            
         }
 

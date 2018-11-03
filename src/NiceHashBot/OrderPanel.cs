@@ -41,7 +41,7 @@ namespace NiceHashBot
             {
                 Width = 200,
                 Height = height,
-                BackColor = System.Drawing.Color.Red,
+                BackColor = System.Drawing.Color.White,
                 BorderStyle = BorderStyle.FixedSingle,
             };
 
@@ -51,6 +51,8 @@ namespace NiceHashBot
                 panel.BackColor = System.Drawing.Color.Yellow;
             else if (!order.OrderStats.Alive)
                 panel.BackColor = System.Drawing.Color.IndianRed;
+            else
+                panel.BackColor = System.Drawing.Color.LightGreen;
         }
 
         private void FillPanel()
@@ -132,20 +134,32 @@ namespace NiceHashBot
             panel.Controls.Add(SetButton);
             SetButton.Click += (o, args) =>
             {
-                order.Limit = Convert.ToDouble(LimitTextBox.Text);
-                order.MaxPrice = Convert.ToDouble(PriceTextBox.Text) + Convert.ToDouble(AddBitsTextBox.Text) * 0.0001;
-                if (Sync != -1)
+                int i = 0;
+                foreach (OrderContainer _order in OrderContainer.GetAll())
                 {
-                    OrderContainer[] Orders = OrderContainer.GetAll();
-                    foreach(OrderContainer Order in Orders)
+                    if (_order.ID == order.ID)
                     {
-                        if (Order.ID == Sync)
+                        OrderContainer.SetLimit(i, Convert.ToDouble(LimitTextBox.Text));
+                        OrderContainer.SetMaxPrice(i, Convert.ToDouble(PriceTextBox.Text) + Convert.ToDouble(AddBitsTextBox.Text) * 0.0001);
+                        if (Sync != -1)
                         {
-                            Order.Limit = Convert.ToDouble(LimitTextBox.Text);
-                            Order.MaxPrice = Convert.ToDouble(PriceTextBox.Text) + Convert.ToDouble(AddBitsTextBox.Text) * 0.0001;
+                            OrderContainer[] Orders = OrderContainer.GetAll();
+                            int _i = 0;
+                            foreach (OrderContainer Order in Orders)
+                            {
+                                if (Order.ID == Sync)
+                                {
+                                    OrderContainer.SetLimit(_i, Convert.ToDouble(LimitTextBox.Text));
+                                    OrderContainer.SetMaxPrice(_i, Convert.ToDouble(PriceTextBox.Text) + Convert.ToDouble(AddBitsTextBox.Text) * 0.0001);
+                                }
+                                _i++;
+                            }
                         }
                     }
+
+                    i++;
                 }
+                                   
             };
             SetButton.Click += TimerRefresh;
 
