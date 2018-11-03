@@ -230,7 +230,7 @@ namespace NiceHashBot
                     pleaseWait.StartPosition = FormStartPosition.CenterScreen;
                     pleaseWait.Show();
                     //
-                    await DeleteAsync(Orders);
+                    await DeleteOrdersAsync(Orders);
                     pleaseWait.Close();
                 }
                 catch(Exception ex) { Console.WriteLine(ex); }
@@ -239,7 +239,7 @@ namespace NiceHashBot
             Refresh();
         }
 
-        private async Task<bool> DeleteAsync(OrderContainer[] Orders)
+        private async Task<bool> DeleteOrdersAsync(OrderContainer[] Orders)
         {
             bool wait = false;
 
