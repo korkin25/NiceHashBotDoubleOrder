@@ -59,3 +59,17 @@ src/NiceHashBot/obj/x86/Release/NiceHashBot.pdb
 src/NiceHashBot/bin/Release/NiceHashBot.pdb
 src/.vs/NHB/v15/Server/sqlite3/storage.ide-wal
 src/.vs/NHB/v15/.suo
+src/.vs/NHB/v15/.suo
+src/.vs/NHB/v15/Server/sqlite3/storage.ide
+src/.vs/NHB/v15/Server/sqlite3/storage.ide-shm
+src/.vs/NHB/v15/Server/sqlite3/storage.ide-wal
+src/HandlerExample/bin/Debug/HandlerExample.pdb
+src/HandlerExample/bin/Debug/NiceHashBotLib.pdb
+src/HandlerExample/obj/Debug/HandlerExample.csprojAssemblyReference.cache
+src/HandlerExample/obj/Debug/HandlerExample.pdb
+src/NiceHashBot/bin/Debug/NiceHashBot.pdb
+src/NiceHashBot/bin/Debug/NiceHashBotLib.pdb
+src/NiceHashBot/bin/Debug/pools.json
+src/NiceHashBot/obj/x86/Debug/NiceHashBot.pdb
+src/NiceHashBotLib/bin/Debug/NiceHashBotLib.pdb
+src/NiceHashBotLib/obj/Debug/NiceHashBotLib.pdb

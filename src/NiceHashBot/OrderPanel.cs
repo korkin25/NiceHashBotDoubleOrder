@@ -96,7 +96,7 @@ namespace NiceHashBot
 
             var PriceTextBox = new TextBox
             {
-                Text = order.MaxPrice.ToString(),
+                Text = order.MaxPrice.ToString("F4"),
                 Location = new System.Drawing.Point(50, 32),
                 Width = 50,
             };
@@ -132,7 +132,14 @@ namespace NiceHashBot
                 BackColor = SystemColors.ButtonFace,
             };
             panel.Controls.Add(SetButton);
-            SetButton.Click += (o, args) =>
+            SetButton.Click += async (o, args) =>
+            {
+                await SetValuesAsync();
+                TimerRefresh(null, null);
+            };
+            //SetButton.Click += TimerRefresh;
+
+            async Task<bool> SetValuesAsync()
             {
                 int i = 0;
                 foreach (OrderContainer _order in OrderContainer.GetAll())
@@ -140,6 +147,7 @@ namespace NiceHashBot
                     if (_order.ID == order.ID)
                     {
                         OrderContainer.SetLimit(i, Convert.ToDouble(LimitTextBox.Text));
+                        await Task.Delay(1000);
                         OrderContainer.SetMaxPrice(i, Convert.ToDouble(PriceTextBox.Text) + Convert.ToDouble(AddBitsTextBox.Text) * 0.0001);
                         if (Sync != -1)
                         {
@@ -149,7 +157,9 @@ namespace NiceHashBot
                             {
                                 if (Order.ID == Sync)
                                 {
+                                    await Task.Delay(1000);
                                     OrderContainer.SetLimit(_i, Convert.ToDouble(LimitTextBox.Text));
+                                    await Task.Delay(1000);
                                     OrderContainer.SetMaxPrice(_i, Convert.ToDouble(PriceTextBox.Text) + Convert.ToDouble(AddBitsTextBox.Text) * 0.0001);
                                 }
                                 _i++;
@@ -159,9 +169,8 @@ namespace NiceHashBot
 
                     i++;
                 }
-                                   
-            };
-            SetButton.Click += TimerRefresh;
+                return true;
+            }
 
             var RefillButton = new Button
             {
