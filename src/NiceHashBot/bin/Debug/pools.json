@@ -1,12 +1,5 @@
 [
   {
-    "Label": "MyPool1",
-    "Host": "stratum.mychosenpool.com",
-    "Port": 3333,
-    "User": "user",
-    "Password": "x"
-  },
-  {
     "Label": "BSOD",
     "Host": "eu.bsod.pw",
     "Port": 2268,
