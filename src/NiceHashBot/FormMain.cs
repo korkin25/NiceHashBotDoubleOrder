@@ -117,7 +117,7 @@ namespace NiceHashBot
 
         private void toolStripLabel1_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://www.nicehash.com/index.jsp?p=wallet");
+            System.Diagnostics.Process.Start("https://www.nicehash.com/wallet");
         }
 
         private void removeToolStripMenuItem_Click(object sender, EventArgs e)

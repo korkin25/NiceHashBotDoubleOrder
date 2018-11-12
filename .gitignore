@@ -73,3 +73,9 @@ src/NiceHashBot/bin/Debug/pools.json
 src/NiceHashBot/obj/x86/Debug/NiceHashBot.pdb
 src/NiceHashBotLib/bin/Debug/NiceHashBotLib.pdb
 src/NiceHashBotLib/obj/Debug/NiceHashBotLib.pdb
+src/NiceHashBot/obj/x86/Release/NiceHashBot.pdb
+src/NiceHashBot/obj/x86/Debug/NiceHashBot.pdb
+src/NiceHashBot/obj/x86/Debug/NiceHashBot.csproj.GenerateResource.cache
+src/NiceHashBot/bin/Release/NiceHashBot.pdb
+src/NiceHashBot/bin/Debug/NiceHashBot.pdb
+src/.vs/NHB/v15/.suo

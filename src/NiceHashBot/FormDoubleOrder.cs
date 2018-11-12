@@ -285,7 +285,6 @@ namespace NiceHashBot
                 if (Orders[i].Algorithm == AlgorithmComboBox.SelectedIndex)
                     if (Orders[i].OrderStats != null)
                     {
-                        //Orders[i].MaxPrice = Convert.ToDouble(OvPriceTextBox.Text);
                         if (needDelay) await Task.Delay(2000);
                         OrderContainer.SetMaxPrice(i, Convert.ToDouble(OvPriceTextBox.Text));
                         APIWrapper.OrderSetPrice(Orders[i].ServiceLocation, Orders[i].Algorithm, Orders[i].ID, Convert.ToDouble(OvPriceTextBox.Text));
@@ -318,7 +317,6 @@ namespace NiceHashBot
                 if (Orders[i].Algorithm == AlgorithmComboBox.SelectedIndex)
                     if (Orders[i].OrderStats != null)
                     {
-                        //Orders[i].Limit = Convert.ToDouble(OvSpeedTextBox.Text);
                         if (needDelay) await Task.Delay(2000);
                         OrderContainer.SetLimit(i, Convert.ToDouble(OvSpeedTextBox.Text));
                         APIWrapper.OrderSetLimit(Orders[i].ServiceLocation, Orders[i].Algorithm, Orders[i].ID, Convert.ToDouble(OvSpeedTextBox.Text));
