@@ -33,18 +33,14 @@ namespace NiceHashBot
             this.Text = Application.ProductName + " [v" + Application.ProductVersion + "] Orders";
 
             BalanceRefresh = new Timer();
-            BalanceRefresh.Interval = 30 * 1000;
+            BalanceRefresh.Interval = 10 * 1000;
             BalanceRefresh.Tick += new EventHandler(BalanceRefresh_Tick);
             BalanceRefresh.Start();
-            BalanceRefresh_Tick(null, null);
 
             TimerRefresh = new Timer();
             TimerRefresh.Interval = 60000;
             TimerRefresh.Tick += new EventHandler(TimerRefresh_Tick);
-            TimerRefresh.Start();
-            TimerRefresh_Tick(null, null);
-            AlgorithmComboBox.SelectedIndexChanged += new EventHandler(TimerRefresh_Tick);
-            PoolComboBox.SelectedIndexChanged += new EventHandler(TimerRefresh_Tick);
+            TimerRefresh.Start();            
 
             RefreshPoolList();
 
@@ -55,6 +51,10 @@ namespace NiceHashBot
             if (PoolComboBox.Items.Count > 0)
             PoolComboBox.SelectedIndex = 0;
 
+            AlgorithmComboBox.SelectedIndexChanged += new EventHandler(TimerRefresh_Tick);
+            PoolComboBox.SelectedIndexChanged += new EventHandler(TimerRefresh_Tick);
+
+            Refresh();
         }
 
         private void BalanceRefresh_Tick(object sender, EventArgs e)
@@ -64,17 +64,15 @@ namespace NiceHashBot
                 Console.WriteLine("Can not receive balance - Invalid Authorisation");
                 return;
             }
+            RefreshBalance();
+            
+        }
 
+        private async Task RefreshBalance()
+        {
             APIBalance Balance = APIWrapper.GetBalance();
-
-            if (Balance == null)
-            {
-                BalanceLabel.Text = "";
-            }
-            else
-            {
-                BalanceLabel.Text = Balance.Confirmed.ToString("F8") + " BTC";
-            }
+            if (Balance == null) { BalanceLabel.Text = ""; }
+            else { BalanceLabel.Text = Balance.Confirmed.ToString("F8") + " BTC"; }
         }
 
         private void Refresh()
@@ -84,7 +82,7 @@ namespace NiceHashBot
         }
 
         private void TimerRefresh_Tick(object sender, EventArgs e)
-        {
+        {            
             EUOrderPanel.Controls.Clear();
             USOrderPanel.Controls.Clear();
             SyncOrderPanel.Controls.Clear();
@@ -99,9 +97,20 @@ namespace NiceHashBot
            
             List<OrderPanel> OrderPanels = new List<OrderPanel>();
 
+            bool needRefresh = false;
+
             for (int i = 0; i < Orders.Length; i++)
+            {
                 if (Orders[i].Algorithm == AlgorithmComboBox.SelectedIndex)
                     OrderPanels.Add(new OrderPanel(i, Orders[i], new EventHandler(TimerRefresh_Tick)));
+
+                if (Orders[i].OrderStats != null)
+                    if (Orders[i].OrderStats.Price > Orders[i].MaxPrice)
+                    {
+                        Orders[i].MaxPrice = Orders[i].OrderStats.Price;
+                        needRefresh = true;
+                    }                       
+            }                           
 
             PositionPanels(ref OrderPanels);
 
@@ -113,6 +122,8 @@ namespace NiceHashBot
                     panel.Place(ref USOrderPanel, ref SyncOrderPanel);
             }
             SyncOrderPanel.Height = EUOrderPanel.Height > USOrderPanel.Height ? EUOrderPanel.Height : USOrderPanel.Height;
+
+            if (needRefresh) Refresh();
         }
 
         private void PositionPanels(ref List<OrderPanel> OrderPanels)
@@ -241,39 +252,85 @@ namespace NiceHashBot
 
         private async Task<bool> DeleteOrdersAsync(OrderContainer[] Orders)
         {
-            bool wait = false;
+            bool needWait = false;
 
             for (int i = Orders.Length - 1; i >= 0; i--)
                 if (Orders[i].Algorithm == AlgorithmComboBox.SelectedIndex)
                 {
-                    if (wait) await Task.Delay(1100);
+                    if (needWait) await Task.Delay(1100);
                     OrderContainer.Remove(i);
-                    wait = true;
+                    needWait = true;
                 }                    
             return true;
         }
 
-        private void OvPriceConfirmButton_Click(object sender, EventArgs e)
+        private void OvPriceConfirmButton_ClickAsync(object sender, EventArgs e)
         {
+            SetOvPriceAsync();            
+        }
+
+        private async Task SetOvPriceAsync()
+        {
+            FormPleaseWait pleaseWait = new FormPleaseWait();
+            try
+            {
+                pleaseWait.StartPosition = FormStartPosition.CenterScreen;
+                pleaseWait.Show();
+            }
+            catch (Exception ex) { Console.WriteLine(ex); }
+
+            bool needDelay = false;
             OrderContainer[] Orders = OrderContainer.GetAll();
             for (int i = Orders.Length - 1; i >= 0; i--)
                 if (Orders[i].Algorithm == AlgorithmComboBox.SelectedIndex)
                     if (Orders[i].OrderStats != null)
-                        Orders[i].MaxPrice = Convert.ToDouble(OvPriceTextBox.Text);
+                    {
+                        //Orders[i].MaxPrice = Convert.ToDouble(OvPriceTextBox.Text);
+                        if (needDelay) await Task.Delay(2000);
+                        OrderContainer.SetMaxPrice(i, Convert.ToDouble(OvPriceTextBox.Text));
+                        APIWrapper.OrderSetPrice(Orders[i].ServiceLocation, Orders[i].Algorithm, Orders[i].ID, Convert.ToDouble(OvPriceTextBox.Text));
+                        needDelay = true;
+                    }
+            try { pleaseWait.Close(); }
+            catch (Exception ex) { Console.WriteLine(ex); }
+
             Refresh();
         }
 
         private void OvSpeedConfirmButton_Click(object sender, EventArgs e)
         {
+            SetOvSpeedAsync();
+        }
+
+        private async Task SetOvSpeedAsync()
+        {
+            FormPleaseWait pleaseWait = new FormPleaseWait();
+            try
+            {
+                pleaseWait.StartPosition = FormStartPosition.CenterScreen;
+                pleaseWait.Show();
+            }
+            catch (Exception ex) { Console.WriteLine(ex); }
+
+            bool needDelay = false;
             OrderContainer[] Orders = OrderContainer.GetAll();
             for (int i = Orders.Length - 1; i >= 0; i--)
                 if (Orders[i].Algorithm == AlgorithmComboBox.SelectedIndex)
                     if (Orders[i].OrderStats != null)
-                        Orders[i].Limit = Convert.ToDouble(OvSpeedTextBox.Text);
+                    {
+                        //Orders[i].Limit = Convert.ToDouble(OvSpeedTextBox.Text);
+                        if (needDelay) await Task.Delay(2000);
+                        OrderContainer.SetLimit(i, Convert.ToDouble(OvSpeedTextBox.Text));
+                        APIWrapper.OrderSetLimit(Orders[i].ServiceLocation, Orders[i].Algorithm, Orders[i].ID, Convert.ToDouble(OvSpeedTextBox.Text));
+                        needDelay = true;
+                    }
+            try { pleaseWait.Close(); }
+            catch (Exception ex) { Console.WriteLine(ex); }
+
             Refresh();
         }
 
-        private void FindOrdersButton_Click(object sender, EventArgs e)
+            private void FindOrdersButton_Click(object sender, EventArgs e)
         {
             DesyncController.Delete();
 
@@ -299,6 +356,11 @@ namespace NiceHashBot
             }
 
             Refresh();            
+        }
+
+        private void BalanceLabel_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://www.nicehash.com/wallet");
         }
 
         private void USConfirmButton_Click(object sender, EventArgs e)

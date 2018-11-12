@@ -35,7 +35,7 @@ namespace NiceHashBot
                     using (StreamReader sr = new StreamReader(GetFilePath()))
                     {
                         readString = sr.ReadToEnd();
-                        Console.WriteLine(readString);
+                        //Console.WriteLine(readString);
                     }
                 }
                 catch (Exception e)

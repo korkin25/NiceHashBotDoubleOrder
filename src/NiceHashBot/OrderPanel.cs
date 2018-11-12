@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NiceHashBotLib;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -137,30 +138,67 @@ namespace NiceHashBot
                 await SetValuesAsync();
                 TimerRefresh(null, null);
             };
-            //SetButton.Click += TimerRefresh;
+            //SetButton.Click += TimerRefresh;            
 
             async Task<bool> SetValuesAsync()
             {
+                int delayTime = 1900;
                 int i = 0;
+                bool needDelay = false;
+
+                FormPleaseWait pleaseWait = new FormPleaseWait();
+                try
+                {
+                    pleaseWait.StartPosition = FormStartPosition.CenterScreen;
+                    pleaseWait.Show();                   
+                }
+                catch (Exception ex) { Console.WriteLine(ex); }
+
                 foreach (OrderContainer _order in OrderContainer.GetAll())
                 {
                     if (_order.ID == order.ID)
                     {
-                        OrderContainer.SetLimit(i, Convert.ToDouble(LimitTextBox.Text));
-                        await Task.Delay(1000);
-                        OrderContainer.SetMaxPrice(i, Convert.ToDouble(PriceTextBox.Text) + Convert.ToDouble(AddBitsTextBox.Text) * 0.0001);
+                        if (_order.Limit != Convert.ToDouble(LimitTextBox.Text))
+                        {
+                            if (needDelay) await Task.Delay(delayTime);
+                            OrderContainer.SetLimit(i, Convert.ToDouble(LimitTextBox.Text));
+                            APIWrapper.OrderSetLimit(_order.ServiceLocation, _order.Algorithm, _order.ID, Convert.ToDouble(LimitTextBox.Text));
+                            needDelay = true;
+                        }
+
+                        if (_order.MaxPrice != Convert.ToDouble(PriceTextBox.Text) + Convert.ToDouble(AddBitsTextBox.Text) * 0.0001)
+                        {
+                            if (needDelay) await Task.Delay(delayTime);
+                            OrderContainer.SetMaxPrice(i, Convert.ToDouble(PriceTextBox.Text) + Convert.ToDouble(AddBitsTextBox.Text) * 0.0001);
+                            APIWrapper.OrderSetPrice(_order.ServiceLocation, _order.Algorithm, _order.ID, Convert.ToDouble(PriceTextBox.Text) + Convert.ToDouble(AddBitsTextBox.Text) * 0.0001);
+                            needDelay = true;
+                        }
+
                         if (Sync != -1)
                         {
                             OrderContainer[] Orders = OrderContainer.GetAll();
                             int _i = 0;
-                            foreach (OrderContainer Order in Orders)
+                            foreach (OrderContainer _orderSynced in Orders)
                             {
-                                if (Order.ID == Sync)
+                                if (_orderSynced.ID == Sync)
                                 {
-                                    await Task.Delay(1000);
-                                    OrderContainer.SetLimit(_i, Convert.ToDouble(LimitTextBox.Text));
-                                    await Task.Delay(1000);
-                                    OrderContainer.SetMaxPrice(_i, Convert.ToDouble(PriceTextBox.Text) + Convert.ToDouble(AddBitsTextBox.Text) * 0.0001);
+                                    if (_orderSynced.Limit != Convert.ToDouble(LimitTextBox.Text))
+                                    {
+                                        if (needDelay) await Task.Delay(delayTime);
+                                        OrderContainer.SetLimit(_i, Convert.ToDouble(LimitTextBox.Text));
+                                        APIWrapper.OrderSetLimit(_orderSynced.ServiceLocation, _orderSynced.Algorithm, _orderSynced.ID, Convert.ToDouble(LimitTextBox.Text));
+                                        needDelay = true;
+                                    }
+
+                                    if (_orderSynced.MaxPrice != Convert.ToDouble(PriceTextBox.Text) + Convert.ToDouble(AddBitsTextBox.Text) * 0.0001)
+                                    {
+                                        if (needDelay) await Task.Delay(delayTime);
+                                        OrderContainer.SetMaxPrice(_i, Convert.ToDouble(PriceTextBox.Text) + Convert.ToDouble(AddBitsTextBox.Text) * 0.0001);
+                                        APIWrapper.OrderSetPrice(_orderSynced.ServiceLocation, _orderSynced.Algorithm, _orderSynced.ID, Convert.ToDouble(PriceTextBox.Text) + Convert.ToDouble(AddBitsTextBox.Text) * 0.0001);
+                                        needDelay = true;
+                                    }
+
+                                    break;
                                 }
                                 _i++;
                             }
@@ -169,6 +207,9 @@ namespace NiceHashBot
 
                     i++;
                 }
+                try { pleaseWait.Close(); }
+                catch (Exception ex) { Console.WriteLine(ex); }
+
                 return true;
             }
 

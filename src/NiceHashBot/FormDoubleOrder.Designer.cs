@@ -134,6 +134,7 @@
             this.BalanceLabel.Size = new System.Drawing.Size(95, 13);
             this.BalanceLabel.TabIndex = 9;
             this.BalanceLabel.Text = "0,0000000 BTC";
+            this.BalanceLabel.Click += new System.EventHandler(this.BalanceLabel_Click);
             // 
             // EULabel
             // 
@@ -400,7 +401,7 @@
             this.OvPriceConfirmButton.TabIndex = 1;
             this.OvPriceConfirmButton.Text = "OK";
             this.OvPriceConfirmButton.UseVisualStyleBackColor = true;
-            this.OvPriceConfirmButton.Click += new System.EventHandler(this.OvPriceConfirmButton_Click);
+            this.OvPriceConfirmButton.Click += new System.EventHandler(this.OvPriceConfirmButton_ClickAsync);
             // 
             // OvPriceLabel
             // 

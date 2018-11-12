@@ -49,7 +49,7 @@
             this.ControlBox = false;
             this.Controls.Add(this.label1);
             this.Name = "FormPleaseWait";
-            this.Text = "Deleting orders...";
+            this.Text = "Working...";
             this.ResumeLayout(false);
             this.PerformLayout();
 
