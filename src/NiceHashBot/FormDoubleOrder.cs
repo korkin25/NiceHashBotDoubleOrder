@@ -93,8 +93,8 @@ namespace NiceHashBot
             OrderContainer[] Orders = OrderContainer.GetAll();
             if (Orders.Count() > OrderID) OrderID = Orders.Count();
 
-            if (Orders.Length == 0) return;
-           
+            if (Orders.Length == 0) return;            
+
             List<OrderPanel> OrderPanels = new List<OrderPanel>();
 
             bool needRefresh = false;

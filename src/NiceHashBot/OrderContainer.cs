@@ -21,6 +21,8 @@ namespace NiceHashBot
         public double StartingPrice;
         public double StartingAmount;
         public string HandlerDLL;
+        public double MaxPriceInput;
+        public double BitsInput;
 
         [JsonIgnore]
         public Order OrderStats;

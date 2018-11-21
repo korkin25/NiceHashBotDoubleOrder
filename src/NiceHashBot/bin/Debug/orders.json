@@ -1,26 +1,9 @@
 [
   {
-    "ID": 3718798,
-    "Algorithm": 0,
-    "ServiceLocation": 0,
-    "MaxPrice": 0.2251,
-    "Limit": 0.0,
-    "PoolData": {
-      "Label": null,
-      "Host": null,
-      "Port": 0,
-      "User": null,
-      "Password": null
-    },
-    "StartingPrice": 0.001,
-    "StartingAmount": 0.005,
-    "HandlerDLL": ""
-  },
-  {
-    "ID": 3718800,
+    "ID": 3799555,
     "Algorithm": 0,
     "ServiceLocation": 1,
-    "MaxPrice": 0.2251,
+    "MaxPrice": 0.0056000000000000008,
     "Limit": 0.0,
     "PoolData": {
       "Label": null,
@@ -31,6 +14,8 @@
     },
     "StartingPrice": 0.001,
     "StartingAmount": 0.005,
-    "HandlerDLL": ""
+    "HandlerDLL": "",
+    "MaxPriceInput": 0.0051,
+    "BitsInput": 5.0
   }
 ]

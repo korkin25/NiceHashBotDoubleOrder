@@ -102,6 +102,17 @@ namespace NiceHashBot
                 Width = 50,
             };
             panel.Controls.Add(PriceTextBox);
+            PriceTextBox.TextChanged += PriceTextBox_TextChanged;
+
+            if (order.MaxPriceInput != 0)
+                PriceTextBox.Text = order.MaxPriceInput.ToString("F4");
+
+            ToolTip currentPriceTooltip = new ToolTip();
+            currentPriceTooltip.ToolTipIcon = ToolTipIcon.Info;
+            currentPriceTooltip.IsBalloon = true;
+            currentPriceTooltip.ShowAlways = true;
+
+            currentPriceTooltip.SetToolTip(PriceTextBox, order.MaxPrice.ToString("F4"));
 
             var AddBitsTextBox = new TextBox
             {
@@ -110,6 +121,10 @@ namespace NiceHashBot
                 Width = 30,
             };
             panel.Controls.Add(AddBitsTextBox);
+            AddBitsTextBox.TextChanged += AddBitsTextBox_TextChanged;
+
+            if (order.BitsInput != 0)
+                AddBitsTextBox.Text = order.BitsInput.ToString();
 
             panel.Controls.Add(new Label
             {
@@ -172,6 +187,8 @@ namespace NiceHashBot
                             OrderContainer.SetMaxPrice(i, Convert.ToDouble(PriceTextBox.Text) + Convert.ToDouble(AddBitsTextBox.Text) * 0.0001);
                             APIWrapper.OrderSetPrice(_order.ServiceLocation, _order.Algorithm, _order.ID, Convert.ToDouble(PriceTextBox.Text) + Convert.ToDouble(AddBitsTextBox.Text) * 0.0001);
                             needDelay = true;
+                            _order.MaxPriceInput = _order.MaxPrice;
+                            _order.BitsInput = 0;
                         }
 
                         if (Sync != -1)
@@ -196,6 +213,8 @@ namespace NiceHashBot
                                         OrderContainer.SetMaxPrice(_i, Convert.ToDouble(PriceTextBox.Text) + Convert.ToDouble(AddBitsTextBox.Text) * 0.0001);
                                         APIWrapper.OrderSetPrice(_orderSynced.ServiceLocation, _orderSynced.Algorithm, _orderSynced.ID, Convert.ToDouble(PriceTextBox.Text) + Convert.ToDouble(AddBitsTextBox.Text) * 0.0001);
                                         needDelay = true;
+                                        _orderSynced.MaxPriceInput = _orderSynced.MaxPrice;
+                                        _orderSynced.BitsInput = 0;
                                     }
 
                                     break;
@@ -228,6 +247,28 @@ namespace NiceHashBot
             RefillButton.Click += TimerRefresh;
         }
 
+        private void AddBitsTextBox_TextChanged(object sender, EventArgs e)
+        {
+            order.BitsInput = Convert.ToDouble((sender as TextBox).Text);
+        }
+
+        private void PriceTextBox_TextChanged(object sender, EventArgs e)
+        {
+            string line = (sender as TextBox).Text;
+
+            for (int i = 0; i < line.Length; i++)
+            {
+                if ((char.IsDigit(line[i])) || (line[i] == '.'))
+                    continue;
+
+                line = line.Remove(i, 1);
+                i--;
+            }
+            Console.WriteLine(line);
+            (sender as TextBox).Text = line;
+
+            order.MaxPriceInput = Convert.ToDouble((sender as TextBox).Text);
+        }
 
         public void Place(ref Panel place, ref Panel SyncOrderPanel)
         {
